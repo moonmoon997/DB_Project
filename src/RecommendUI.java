@@ -25,6 +25,7 @@ public class RecommendUI extends JFrame{
 		
 		Foodlist fl=new Foodlist();
 		Food[] food=fl.get_Foodlist();
+		//
 		List<String> mainc = new ArrayList<String>();
 		mainc.add("");
 		for(int i=0;i<food.length;i++) {
@@ -33,12 +34,15 @@ public class RecommendUI extends JFrame{
 		}
 		Collections.sort(mainc);
 		maincbb = new JComboBox(mainc.toArray());
-		
+		//
 		List<String> midc = new ArrayList<String>();
 		for(int i=0; i<food.length;i++) {
 			if (food[i].get_maincatagory().equals(maincbb.getSelectedItem().toString()) && !midc.contains(food[i].get_middleclass()))
 				midc.add(food[i].get_middleclass());
 		}
+		Collections.sort(midc);
+		midcbb = new JComboBox(mainc.toArray());
+		
 		JLabel lb1=new JLabel("대분류 : ");
 		JLabel lb2=new JLabel("중분류 : ");
 		
