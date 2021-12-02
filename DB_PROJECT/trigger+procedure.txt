@@ -1,0 +1,27 @@
+CREATE or REPLACE TRIGGER TRIGGER_Star
+ BEFORE INSERT OR DELETE
+ ON review
+ FOR EACH ROW
+BEGIN
+    IF INSERTING THEN        
+        UPDATE restaurant SET resreviews = resreviews + 1 WHERE :NEW.resname = restaurant.resname;
+     
+    ELSIF DELETING  THEN   
+        UPDATE restaurant SET resreviews = resreviews - 1 WHERE :NEW.resname = restaurant.resname;
+    END IF;
+END;
+
+
+
+CREATE or REPLACE TRIGGER TRIGGER_favor
+ BEFORE INSERT OR DELETE
+ ON favorite
+ FOR EACH ROW
+BEGIN
+    IF INSERTING THEN        
+        UPDATE restaurant SET resfavusers = resfavusers + 1 WHERE :NEW.resname = restaurant.resname;
+     
+    ELSIF DELETING  THEN   
+        UPDATE restaurant SET resfavusers = resfavusers - 1 WHERE :NEW.resname = restaurant.resname;
+    END IF;
+END;

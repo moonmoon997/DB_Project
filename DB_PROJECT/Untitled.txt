@@ -1,0 +1,253 @@
+ALTER session set "_ORACLE_SCRIPT"=true;
+DROP RM UNIV CASCADE; 
+   -- CASCADE option 
+CREATE USER RM IDENTIFIED BY 1234
+    DEFAULT TABLESPACE USERS
+    TEMPORARY TABLESPACE TEMP;
+GRANT connect, resource, dba TO RM; 
+
+--
+CREATE TABLE userinfo (
+    userid  VARCHAR(15) PRIMARY KEY,
+    userpw  VARCHAR(15),
+    username CHAR(10),
+    userphone CHAR(11)
+);
+
+CREATE TABLE restaurant (
+    resname   VARCHAR(15) PRIMARY KEY,
+    resfoodinfo   VARCHAR(15),
+    resavgstars   NUMBER(3,2),
+    resreviews   INT
+);
+
+CREATE TABLE food(
+    foodname   NCHAR(15) PRIMARY KEY,
+    maincatagory   CHAR(6),
+    middleclass CHAR(10),
+    resname   VARCHAR(15),
+    FOREIGN KEY(resname) REFERENCES restaurant(resname)
+);
+
+CREATE TABLE review(
+    viewnum   INT PRIMARY KEY,
+    viewcontents   NCHAR(40),
+    Stars      NUMBER(3,2),
+    userid      VARCHAR(15),
+    resname   VARCHAR(15),
+    FOREIGN KEY(userid) REFERENCES userinfo(userid),
+    FOREIGN KEY(resname) REFERENCES restaurant(resname)
+);
+
+CREATE TABLE favorite (
+    favnum      INT PRIMARY KEY,
+    userid      VARCHAR(15),
+    resname   VARCHAR(15),
+    FOREIGN KEY(userid) REFERENCES userinfo(userid),
+    FOREIGN KEY(resname) REFERENCES restaurant(resname)
+);
+
+
+--userinfo
+INSERT INTO userinfo VALUES('moon', '1234', '조영문', '010-9089');
+INSERT INTO userinfo VALUES('yuha', '1212', '유하영', '010-1234');
+INSERT INTO userinfo VALUES('gangu', '123123', '유한규', '010-4241');
+INSERT INTO userinfo VALUES('sangmi', '2323', '이상미', '010-5383');
+INSERT INTO userinfo VALUES('yujin', '0099', '조유진', '010-1542');
+INSERT INTO userinfo VALUES('sujin', '1441', '김수진', '010-1415');
+INSERT INTO userinfo VALUES('minsuk', '12312', '진민석', '010-1344');
+INSERT INTO userinfo VALUES('sangmok', '9281', '이상목', '010-4151');
+
+
+
+--restaurant
+INSERT INTO restaurant VALUES('문이네식당','양식',0,0);
+INSERT INTO restaurant VALUES('롤링파스타','양식',0,0);
+INSERT INTO restaurant VALUES('노포맛집','한식',0,0);
+INSERT INTO restaurant VALUES('인생맛집',,'한식',0,0);
+INSERT INTO restaurant VALUES('차이향','중식',0,0);
+INSERT INTO restaurant VALUES('홍콩반점','중식',0,0);
+INSERT INTO restaurant VALUES('청사포횟집','일식',0,0);
+INSERT INTO restaurant VALUES('숙이네','일식',0,0);
+
+---food
+--한식
+INSERT INTO food VALUES('된장찌개', '한식', '국물','노포맛집');
+INSERT INTO food VALUES('스팸김치찌개', '한식', '국물','인생맛집');
+INSERT INTO food VALUES('돼지김치찌개', '한식', '국물','노포맛집');
+INSERT INTO food VALUES('부대찌개', '한식', '국물','노포맛집');
+INSERT INTO food VALUES('청국장','한식', '국물','노포맛집');
+INSERT INTO food VALUES('배추국', '한식', '국물','인생맛집');
+INSERT INTO food VALUES('소고기무국', '한식', '국물','노포맛집');
+INSERT INTO food VALUES('조개미역국', '한식', '국물','인생맛집');
+INSERT INTO food VALUES('얼큰콩나물국', '한식', '국물','인생맛집');
+INSERT INTO food VALUES('시금치된장국', '한식', '국물','노포맛집');
+INSERT INTO food VALUES('낙지덮밥', '한식', '밥','인생맛집');
+INSERT INTO food VALUES('김치치즈볶음밥', '한식', '밥','노포맛집');
+INSERT INTO food VALUES('참치마요덮밥', '한식', '밥','인생맛집');
+INSERT INTO food VALUES('스팸마요덮밥', '한식', '밥','노포맛집');
+INSERT INTO food VALUES('스팸치즈덮밥', '한식', '밥','인생맛집');
+INSERT INTO food VALUES('계절나물비빔밥', '한식', '밥','노포맛집');
+INSERT INTO food VALUES('냉면', '한식', '면','인생맛집');
+INSERT INTO food VALUES('얼큰라면', '한식', '면','노포맛집');
+INSERT INTO food VALUES('치즈라면', '한식', '면','인생맛집');
+INSERT INTO food VALUES('콩국수', '한식', '면','노포맛집');
+INSERT INTO food VALUES('밀면', '한식', '면','인생맛집');
+INSERT INTO food VALUES('막국수', '한식', '면','노포맛집');
+INSERT INTO food VALUES('생삼겹살', '한식', '고기','노포맛집');
+INSERT INTO food VALUES('소고기', '한식', '고기','인생맛집');
+INSERT INTO food VALUES('삼계탕', '한식', '고기','노포맛집');
+INSERT INTO food VALUES('후라이드치킨', '한식', '고기','인생맛집');
+
+--양식
+INSERT INTO food VALUES('알리오올리오', '양식', '면','롤링파스타');
+INSERT INTO food VALUES('까르보나라', '양식', '면','문이네식당');
+INSERT INTO food VALUES('해물파스타', '양식', '면','롤링파스타');
+INSERT INTO food VALUES('게살오이스터파스타', '양식', '면','롤링파스타');
+INSERT INTO food VALUES('빠네크림파스타', '양식', '면','문이네식당');
+INSERT INTO food VALUES('새우오일파스타', '양식', '면','문이네식당');
+INSERT INTO food VALUES('토마토스파게티', '양식', '면','롤링파스타');
+INSERT INTO food VALUES('크림스파게티', '양식', '면','문이네식당');
+INSERT INTO food VALUES('토마토파스타', '양식', '면','롤링파스타');
+INSERT INTO food VALUES('해물리조또', '양식', '밥','문이네식당');
+INSERT INTO food VALUES('게살오이스터파스타', '양식', '밥','롤링파스타');
+INSERT INTO food VALUES('목살필라프', '양식', '밥','롤링파스타');
+INSERT INTO food VALUES('쉬림프피자', '양식', '피자','문이네식당');
+INSERT INTO food VALUES('고급스테이크피자', '양식', '피자','스트릿피자');
+INSERT INTO food VALUES('김치필라프', '양식', '밥','롤링파스타');
+INSERT INTO food VALUES('해물빠에야', '양식', '밥','롤링파스타');
+INSERT INTO food VALUES('목살스테이크', '양식', '고기','롤링파스타');
+INSERT INTO food VALUES('안심스테이크', '양식', '고기','문이네식당');
+INSERT INTO food VALUES('폭립', '양식', '고기','롤링파스타');
+INSERT INTO food VALUES('티본스테이크', '양식', '고기','롤링파스타');
+INSERT INTO food VALUES('엘본스테이크', '양식', '고기','문이네식당');
+INSERT INTO food VALUES('토마호크스테이크', '양식', '고기','롤링파스타');
+INSERT INTO food VALUES('플랫아이언', '양식', '고기','문이네식당');
+INSERT INTO food VALUES('고르곤졸라피자', '양식', '피자','롤링파스타');
+INSERT INTO food VALUES('페페로니피자', '양식', '피자','문이네식당');
+INSERT INTO food VALUES('고구마피자', '양식', '피자','롤링파스타');
+INSERT INTO food VALUES('포테이토피자', '양식', '피자','문이네식당');
+INSERT INTO food VALUES('해물피자', '양식', '피자','롤링파스타');
+
+
+--일식
+INSERT INTO food VALUES('스시', '일식', '밥','청사포횟집');
+INSERT INTO food VALUES('규동', '일식', '밥','숙이네');
+INSERT INTO food VALUES('가츠동', '일식', '밥','청사포횟집');
+INSERT INTO food VALUES('오니기리', '일식', '밥','숙이네');
+INSERT INTO food VALUES('덴푸라', '일식', '튀김','청사포횟집');
+INSERT INTO food VALUES('치즈돈가스', '일식', '튀김','청사포횟집');
+INSERT INTO food VALUES('안심돈가스', '일식', '튀김','청사포횟집');
+INSERT INTO food VALUES('해들녁정식', '일식', '튀김','숙이네');
+INSERT INTO food VALUES('고구마돈가스', '일식', '튀김','청사포횟집');
+INSERT INTO food VALUES('매운돈가스', '일식', '튀김','숙이네');
+INSERT INTO food VALUES('가라아게', '일식', '튀김','청사포횟집');
+INSERT INTO food VALUES('스시야마', '일식', '국물','숙이네');
+INSERT INTO food VALUES('라멘', '일식', '국물','청사포횟집');
+INSERT INTO food VALUES('튀김우동', '일식', '국물','청사포횟집');
+INSERT INTO food VALUES('카케우동', '일식', '국물','청사포횟집');
+INSERT INTO food VALUES('찬고나배', '일식', '국물','숙이네');
+INSERT INTO food VALUES('붓카케우동', '일식', '면','숙이네');
+INSERT INTO food VALUES('시오라멘', '일식', '면','청사포횟집');
+INSERT INTO food VALUES('츠케멘', '일식', '면','숙이네');
+INSERT INTO food VALUES('소바', '일식', '면','청사포횟집');
+INSERT INTO food VALUES('텐푸라소바', '일식', '면','숙이네');
+INSERT INTO food VALUES('샤브샤브', '일식', '국물','숙이네');
+INSERT INTO food VALUES('야키토리', '일식', '고기','청사포횟집');
+INSERT INTO food VALUES('야키니쿠', '일식', '고기','숙이네');
+
+--중식
+INSERT INTO food VALUES('짜장면', '중식','면','차이향');
+INSERT INTO food VALUES('짬뽕', '중식', '면','홍콩반점');
+INSERT INTO food VALUES('볶음짬뽕', '중식', '면','차이향');
+INSERT INTO food VALUES('중식우동', '중식', '면','차이향');
+INSERT INTO food VALUES('기스면', '중식', '면','홍콩반점');
+INSERT INTO food VALUES('삼선짜장면', '중식', '면','홍콩반점');
+INSERT INTO food VALUES('찹쌀탕수육','중식', '요리','차이향');
+INSERT INTO food VALUES('일반탕수육','중식', '요리','홍콩반점');
+INSERT INTO food VALUES('마파두부', '중식', '요리','차이향');
+INSERT INTO food VALUES('류산슬', '중식', '요리','차이향');
+INSERT INTO food VALUES('깐풍기', '중식', '요리','홍콩반점');
+INSERT INTO food VALUES('팔보채', '중식', '요리','차이향');
+INSERT INTO food VALUES('야채볶음밥', '중식', '밥','홍콩반점');
+INSERT INTO food VALUES('삼선볶음밥', '중식', '밥','차이향');
+INSERT INTO food VALUES('새우볶음밥', '중식', '밥','홍콩반점');
+INSERT INTO food VALUES('베이컨볶음밥', '중식', '밥','차이향');
+INSERT INTO food VALUES('짬뽕밥', '중식', '밥','차이향');
+INSERT INTO food VALUES('고추잡채밥', '중식', '밥','홍콩반점');
+INSERT INTO food VALUES('군만두', '중식', '만두','차이향');
+INSERT INTO food VALUES('찐만두', '중식', '만두','홍콩반점');
+INSERT INTO food VALUES('물만두', '중식', '만두','홍콩반점');
+INSERT INTO food VALUES('꽃빵', '중식', '만두','차이향');
+
+
+--favorite
+CREATE SEQUENCE favnumSEQ --시퀸스로 즐겨찾기번호메기기
+   START WITH 1
+   INCREMENT BY 1;
+
+INSERT INTO favorite VALUES(favnumSEQ.NEXTVAL, 'moon', '문이네식당');
+INSERT INTO favorite VALUES(favnumSEQ.NEXTVAL, 'yuha', '롤링파스타');
+INSERT INTO favorite VALUES(favnumSEQ.NEXTVAL, 'sangmi', '부산식당');
+INSERT INTO favorite VALUES(favnumSEQ.NEXTVAL, 'gangu', '노포맛집');
+
+--review
+CREATE SEQUENCE viewnumSEQ --시퀸스로 리뷰번호메기기
+   START WITH 1
+   INCREMENT BY 1;
+
+INSERT INTO review VALUES(viewnumSEQ.NEXTVAL, '맛있었다.',5, 'moon','문이네식당' );
+INSERT INTO review VALUES(viewnumSEQ.NEXTVAL,  '애매한맛.',3, 'yuha','문이네식당' );
+INSERT INTO review VALUES(viewnumSEQ.NEXTVAL,  '너무짜다 나름 괜찮긴 했다.',3, 'yujin','문이네식당' );
+INSERT INTO review VALUES(viewnumSEQ.NEXTVAL,  '환상의맛', 5 , 'sujin','차이향' );
+INSERT INTO review VALUES(viewnumSEQ.NEXTVAL, '내스타일은아니지만 괜찮았다.',2, 'sangmi','차이향' );
+
+
+-- 별점수  트리거 ---
+CREATE or REPLACE TRIGGER TRIGGER_Star
+ BEFORE INSERT OR DELETE
+ ON review
+ FOR EACH ROW
+BEGIN
+    IF INSERTING THEN        
+        UPDATE restaurant SET resreviews = resreviews + 1 WHERE :NEW.resname = restaurant.resname;
+     
+    ELSIF DELETING  THEN   
+        UPDATE restaurant SET resreviews = resreviews - 1 WHERE :NEW.resname = restaurant.resname;
+    END IF;
+END;
+
+
+
+
+
+CREATE or REPLACE TRIGGER TRIGGER_avgStar
+ AFTER INSERT OR DELETE
+ ON review
+ FOR EACH ROW
+BEGIN
+    IF INSERTING THEN        
+        IF :OLD.Stars = NULL THEN
+            UPDATE restaurant SET resavgstars = :NEW.Stars WHERE :NEW.resname = restaurant.resname;
+        ELSIF
+            UPDATE restaurant SET resavgstars = (select avg(Stars)
+                                             from review, restaurant
+                                             where :NEW.resname = restaurant.resname
+                                             group by Stars
+                                             )
+                             where :NEW.resname = restaurant.resname;    
+        END IF;
+        
+    ELSIF DELETING  THEN   
+        IF :NEW.Stars = NULL THEN
+            UPDATE restaurant SET resavgstars = :NEW.Stars WHERE :NEW.resname = restaurant.resname;
+        ELSIF
+            UPDATE restaurant SET resavgstars = (select avg(Stars)
+                                             from review, restaurant
+                                             where :NEW.resname = restaurant.resname
+                                             group by Stars
+                                             )
+                            where :NEW.resname = restaurant.resname;     
+        END IF;
+    END IF;
+END;
