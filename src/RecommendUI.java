@@ -45,7 +45,7 @@ public class RecommendUI extends JFrame{
 		randomdice_btn.setBounds(380, 120,100,50);
 		foodfield.setBounds(380,220,100,50);
 		foodfield.setEnabled(false);
-		resfield.setBounds(380,220,100,50);
+		resfield.setBounds(480,220,100,50);
 		resfield.setEnabled(false);
 		lb1.setBounds(80,130,70,30);
 		lb2.setBounds(80,230,70,30);
