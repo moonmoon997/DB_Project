@@ -8,7 +8,7 @@ public class ReviewUI extends JFrame {
 	
 	JButton recommend_btn = new JButton("메뉴추천");
 	JButton favorite_btn = new JButton("즐겨찾기");
-	JButton board_btn = new JButton("게시판");
+	JButton board_btn = new JButton("리뷰	");
 	JLabel search_LB=new JLabel("검색   : ");
 	JComboBox search_CB;
 	JTextField search_TF=new JTextField(20);
@@ -23,12 +23,12 @@ public class ReviewUI extends JFrame {
 		c.setLayout(null);
 		setSize(600, 465);
 		
-		//control 클래스 생성 & 호출
+		//control �겢�옒�뒪 �깮�꽦 & �샇異�
 		ReviewSystem rvs=new ReviewSystem(us);
 		Reviewlist rl=rvs.updatePostlist();
 		Review[] rll=rl.get_Reviewlist();
 		
-		String header[]= {"번호", "내용", "작성자", "음식점이름"};
+		String header[]= {"번호","내용","작성자", "음식점이름"};
 		String[][] conts;
 		conts=new String[rll.length][header.length];
 		
@@ -43,20 +43,20 @@ public class ReviewUI extends JFrame {
 		
 		pane=new JScrollPane(postlisttable);		
 		
-		// 컬럼 사이즈 지정
+		// 而щ읆 �궗�씠利� 吏��젙
 		postlisttable.getColumnModel().getColumn(0).setPreferredWidth(40);
 		postlisttable.getColumnModel().getColumn(1).setPreferredWidth(250);
 		postlisttable.getColumnModel().getColumn(2).setPreferredWidth(70);
 		postlisttable.getColumnModel().getColumn(3).setPreferredWidth(70);
 		
-		//콤보박스 내용지정
-		String[] kinds= {"내용", "제목", "작성자"};
+		//肄ㅻ낫諛뺤뒪 �궡�슜吏��젙
+		String[] kinds= {"내용", "음식점", "작성자"};
 		search_CB=new JComboBox(kinds);
 		
-		//요소 위치지정
+		//�슂�냼 �쐞移섏��젙
 		recommend_btn.setBounds(0,0,150,50);
-		favorite_btn.setBounds(300,0,150,50);
-		board_btn.setBounds(450,0,150,50);
+		favorite_btn.setBounds(150,0,150,50);
+		board_btn.setBounds(300,0,150,50);
 		search_LB.setBounds(180,60,50,30);
 		search_CB.setBounds(235,60,70,30);
 		search_TF.setBounds(315,60,150,30);
@@ -64,14 +64,14 @@ public class ReviewUI extends JFrame {
 		write_btn.setBounds(490,380,80,30);
 		pane.setBounds(15,100,560,270);
 		
-		//버튼이벤트달기
+		//踰꾪듉�씠踰ㅽ듃�떖湲�
 		recommend_btn.addActionListener(new ButtonAction());
 		favorite_btn.addActionListener(new ButtonAction());
 		board_btn.addActionListener(new ButtonAction());
 		search_btn.addActionListener(new ButtonAction());
 		write_btn.addActionListener(new ButtonAction());
 		
-		//요소 추가
+		//�슂�냼 異붽�
 		c.add(recommend_btn);
 		c.add(favorite_btn);
 		c.add(board_btn);
@@ -90,9 +90,9 @@ public class ReviewUI extends JFrame {
 	private class ButtonAction implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			String str = "";
-			//검색버튼 클릭
+			//寃��깋踰꾪듉 �겢由�
 			if(e.getSource()==search_btn) {
-				//control 클래스 생성
+				//control �겢�옒�뒪 �깮�꽦
 				ReviewSystem BS=new ReviewSystem(us);
 				
 				str=search_CB.getSelectedItem().toString();
@@ -101,7 +101,7 @@ public class ReviewUI extends JFrame {
 				Reviewlist p;
 				Review[] pll = null;
 				try {
-					pll = BS.searchPost(str, str2); //control 클래스 searchPost 호출
+					pll = BS.searchPost(str, str2); //control �겢�옒�뒪 searchPost �샇異�
 				} catch (SQLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -119,21 +119,21 @@ public class ReviewUI extends JFrame {
 				}
 				
 				postlisttable=new JTable(conts, header);	
-				// 컬럼 사이즈 지정
+				// 而щ읆 �궗�씠利� 吏��젙
 				postlisttable.getColumnModel().getColumn(0).setPreferredWidth(40);
 				postlisttable.getColumnModel().getColumn(1).setPreferredWidth(300);
 				postlisttable.getColumnModel().getColumn(2).setPreferredWidth(70);
 				postlisttable.getColumnModel().getColumn(3).setPreferredWidth(70);
 				pane.setViewportView(postlisttable);
 			}
-			//글작성버튼 클릭
+			//湲��옉�꽦踰꾪듉 �겢由�
 			else if(e.getSource()==write_btn) {
 				//WriteReviewUI WRUI=new WriteReviewUI(us);
 				dispose();
 			}
 			
-			////////////////상단버튼//////////////////////
-			//상단 메뉴추천버튼 클릭
+			////////////////�긽�떒踰꾪듉//////////////////////
+			//�긽�떒 硫붾돱異붿쿇踰꾪듉 �겢由�
 			else if(e.getSource()==recommend_btn) {
 				try {
 					RecommendUI RUI = new RecommendUI();
@@ -142,11 +142,11 @@ public class ReviewUI extends JFrame {
 					e1.printStackTrace();
 				}
 			}
-			//상단 즐겨찾기버튼 클릭
+			//�긽�떒 利먭꺼李얘린踰꾪듉 �겢由�
 			else if(e.getSource()==favorite_btn) {
 				
 			}
-			//상단 게시판버튼 클릭
+			//�긽�떒 寃뚯떆�뙋踰꾪듉 �겢由�
 			else if(e.getSource()==board_btn) {
 				try {
 					ReviewUI ru = new ReviewUI();

@@ -14,7 +14,6 @@ public class Food {
 	public String get_maincatagory() {
 		return this.maincatagory;
 	}
-
 	public String get_middleclass() {
 		return this.middleclass;
 	}

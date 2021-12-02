@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.List;
 
 public class RecommendUI extends JFrame{
-	String[] midc=null;
+	
 	
 	JButton recommend_btn = new JButton("메뉴추천");
 	JButton favorite_btn = new JButton("즐겨찾기");
@@ -33,13 +33,19 @@ public class RecommendUI extends JFrame{
 		}
 		Collections.sort(mainc);
 		maincbb = new JComboBox(mainc.toArray());
+		
+		List<String> midc = new ArrayList<String>();
+		for(int i=0; i<food.length;i++) {
+			if (food[i].get_maincatagory().equals(maincbb.getSelectedItem().toString()) && !midc.contains(food[i].get_middleclass()))
+				midc.add(food[i].get_middleclass());
+		}
 		JLabel lb1=new JLabel("대분류 : ");
 		JLabel lb2=new JLabel("중분류 : ");
 		
-		//요소 위치지정
+		//�슂�냼 �쐞移섏��젙
 		recommend_btn.setBounds(0,0,150,50);
-		favorite_btn.setBounds(300,0,150,50);
-		review_btn.setBounds(450,0,150,50);
+		favorite_btn.setBounds(150,0,150,50);
+		review_btn.setBounds(300,0,150,50);
 		maincbb.setBounds(150,120,150,50);
 		midcbb.setBounds(150,220,150,50);
 		randomdice_btn.setBounds(380, 120,100,50);
@@ -50,14 +56,15 @@ public class RecommendUI extends JFrame{
 		lb1.setBounds(80,130,70,30);
 		lb2.setBounds(80,230,70,30);
 		
-		//버튼이벤트달기
+		//踰꾪듉�씠踰ㅽ듃�떖湲�
 		recommend_btn.addActionListener(new ButtonAction());
 		favorite_btn.addActionListener(new ButtonAction());
 		review_btn.addActionListener(new ButtonAction());
 		randomdice_btn.addActionListener(new ButtonAction());
 		maincbb.addItemListener(new ItemAction());
-				
-		//요소 추가
+		midcbb.addItemListener(new ItemAction());
+		
+		//�슂�냼 異붽�
 		c.add(recommend_btn);
 		c.add(favorite_btn);
 		c.add(review_btn);
@@ -102,9 +109,9 @@ public class RecommendUI extends JFrame{
 	
 	private class ButtonAction implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			//랜덤버튼 클릭
+			//�옖�뜡踰꾪듉 �겢由�
 			if(e.getSource()==randomdice_btn) {
-				//control 클래스 생성
+				//control �겢�옒�뒪 �깮�꽦
 				String maincatagory = maincbb.getSelectedItem().toString();
 				String middleclass = midcbb.getSelectedItem().toString();
 				RecommendSystem rs=new RecommendSystem();
@@ -119,8 +126,8 @@ public class RecommendUI extends JFrame{
 				}
 			}
 			
-			////////////////상단버튼//////////////////////
-			//상단 메뉴추천버튼 클릭
+			////////////////�긽�떒踰꾪듉//////////////////////
+			//�긽�떒 硫붾돱異붿쿇踰꾪듉 �겢由�
 			else if(e.getSource()==recommend_btn) {
 				try {
 					RecommendUI RUI = new RecommendUI();
@@ -129,11 +136,11 @@ public class RecommendUI extends JFrame{
 					e1.printStackTrace();
 				}
 			}
-			//상단 즐겨찾기버튼 클릭
+			//�긽�떒 利먭꺼李얘린踰꾪듉 �겢由�
 			else if(e.getSource()==favorite_btn) {
 				
 			}
-			//상단 리뷰버튼 클릭
+			//�긽�떒 由щ럭踰꾪듉 �겢由�
 			else if(e.getSource()==review_btn) {
 				try {
 					ReviewUI RevUI = new ReviewUI();
@@ -141,7 +148,6 @@ public class RecommendUI extends JFrame{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				dispose();
 			}
 		}
 	}

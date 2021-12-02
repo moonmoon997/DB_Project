@@ -14,7 +14,7 @@ public class Reviewlist {
 	
 	public Reviewlist() throws SQLException{
 		Connection con = null;
-		String url="jdbc:oracle:this:@localhost:1521LXE";
+		String url="jdbc:oracle:thin:@localhost:1521:XE";
 		String id = "RS";
 		String password="1234";
 		
@@ -69,6 +69,5 @@ public class Reviewlist {
 			return this.Reviewlist;
 		}
 		public static void main(String[] args) throws SQLException{
-			Reviewlist rl=new Reviewlist();
 		}
 }
