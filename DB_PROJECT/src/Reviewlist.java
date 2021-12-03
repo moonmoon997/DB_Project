@@ -69,5 +69,6 @@ public class Reviewlist {
 			return this.Reviewlist;
 		}
 		public static void main(String[] args) throws SQLException{
+			Reviewlist rl=new Reviewlist();
 		}
 }

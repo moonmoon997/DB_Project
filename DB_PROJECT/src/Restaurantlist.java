@@ -15,7 +15,7 @@ public class Restaurantlist {
 	public Restaurantlist(String main) throws SQLException{
 		Connection con=null;
 		
-		String url="jdbc:oralce:thin:@localhost:1521:XE";
+		String url="jdbc:oracle:thin:@localhost:1521:XE";
 		String id="RS";
 		String password="1234";
 		

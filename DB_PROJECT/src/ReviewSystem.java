@@ -68,7 +68,7 @@ public class ReviewSystem {
 		Review[] rv = null;
 		Connection con = null;
 		String url = "jdbc:oracle:thin:@localhost:1521:XE";
-		String id = "RS";
+		String id = "BOARD";
 		String password = "1234";
 		
 		try {
