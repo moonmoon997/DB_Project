@@ -47,19 +47,22 @@ public class RecommendUI extends JFrame{
 		
 		JLabel lb1=new JLabel("대분류 : ");
 		JLabel lb2=new JLabel("중분류 : ");
+		JLabel lb3=new JLabel("음식점목록");
 		
-		//�슂�냼 �쐞移섏��젙
+		//요소위치지정
 		recommend_btn.setBounds(0,0,150,50);
 		favorite_btn.setBounds(150,0,150,50);
 		review_btn.setBounds(300,0,150,50);
 		maincbb.setBounds(150,120,150,50);
 		midcbb.setBounds(150,220,150,50);
 		randomdice_btn.setBounds(380, 120,100,50);
-		foodfield.setBounds(380,220,100,50);
+		foodfield.setBounds(350,220,100,50);
 		foodfield.setEnabled(false);
-		rescbb.setBounds(480,220,80,30);
+		rescbb.setBounds(460,220,100,50);
 		lb1.setBounds(80,130,70,30);
 		lb2.setBounds(80,230,70,30);
+		lb3.setBounds(470,190,70,30);
+		
 		
 		//踰꾪듉�씠踰ㅽ듃�떖湲�
 		recommend_btn.addActionListener(new ButtonAction());
@@ -77,6 +80,7 @@ public class RecommendUI extends JFrame{
 		c.add(midcbb);			
 		c.add(foodfield);		
 		c.add(rescbb);
+		c.add(lb3);
 		c.add(lb1);
 		c.add(lb2);
 				
@@ -103,7 +107,7 @@ public class RecommendUI extends JFrame{
 					for(int i=0; i<midc.toArray().length; i++) {
 						midcbb.addItem(midc.toArray()[i]);
 					}
-				} catch (SQLException e) {
+				} catch (SQLException e) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

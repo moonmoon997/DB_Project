@@ -37,7 +37,7 @@ public class ReviewSystem {
 		catch(SQLException e) {
 			System.out.println("Connection failed.");
 		}
-		String sql="insert into POST values(viewnumSEQ.nextval, ?, ?, ?, ?>)";
+		String sql="insert into POST values(viewnumSEQ.nextval, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, post.get_content());

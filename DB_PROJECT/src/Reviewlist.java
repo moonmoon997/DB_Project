@@ -46,11 +46,11 @@ public class Reviewlist {
 			Reviewlist=new Review[rnum];
 			int i=0;
 			while (rs.next()) {
-				String vnum=rs.getNString(1);
-				String star=rs.getNString(2);
-				String writer=rs.getNString(3);
-				String resname=rs.getNString(4);
-				String content=rs.getNString(5);
+				String vnum=rs.getString(1);
+				String star=rs.getString(2);
+				String writer=rs.getString(3);
+				String resname=rs.getString(4);
+				String content=rs.getString(5);
 				
 				Reviewlist[i] =new Review(Integer.parseInt(vnum), star, writer, resname, content);
 				i++;
