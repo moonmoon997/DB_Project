@@ -34,13 +34,13 @@ public class RecommendSystem {
 		}
 		String sql=null;
 		String sql1="SELECT * FROM (SELECT * FROM food ORDER BY dbms_random.value) WHERE rownum=1";
-		String sql2="SELECT * FROM (SELECT * FROM food ORDER BY dbms_random.value) WHERE maincategory=? and rownum=1";
-		String sql3="SELECT * FROM (SELECT * FROM food ORDER BY dbms_random.value) WHERE maincategory=? and middlecategory=? and rownum=1";
+		String sql2="SELECT * FROM (SELECT * FROM food ORDER BY dbms_random.value) WHERE MAINCATAGORY=? and rownum=1";
+		String sql3="SELECT * FROM (SELECT * FROM food ORDER BY dbms_random.value) WHERE MAINCATAGORY=? and MIDDLECLASS=? and rownum=1";
 		
-		if(main.equals("") && mid.equals("")) { //대분류만 선택했을때
+		if(main.equals("") && mid.equals("")) { //��遺꾨쪟留� �꽑�깮�뻽�쓣�븣
 			sql=sql1;
 		}
-		else if(mid.equals("") && !main.equals("")) {//중분류만 선택했을때
+		else if(mid.equals("") && !main.equals("")) {//以묐텇瑜섎쭔 �꽑�깮�뻽�쓣�븣
 			sql=sql2;
 		}
 		else sql=sql3;

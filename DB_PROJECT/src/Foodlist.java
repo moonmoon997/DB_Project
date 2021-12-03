@@ -12,7 +12,7 @@ public class Foodlist {
 	public Foodlist() throws SQLException{
 		Connection con=null;
 		
-		String url="jdbc:oralce:this:@olocalhost:1521:XE";
+		String url="jdbc:oracle:thin:@localhost:1521:XE";
 		String id="RS";
 		String password="1234";
 		

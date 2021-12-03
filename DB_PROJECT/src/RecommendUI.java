@@ -11,7 +11,7 @@ public class RecommendUI extends JFrame{
 	JButton recommend_btn = new JButton("메뉴추천");
 	JButton favorite_btn = new JButton("즐겨찾기");
 	JButton review_btn = new JButton("리뷰");
-	JButton randomdice_btn=new JButton("랜덤추천");
+	JButton randomdice_btn=new JButton("메뉴추천");
 	JTextField foodfield = new JTextField(30);
 	JComboBox rescbb;
 	JComboBox maincbb;
@@ -43,30 +43,32 @@ public class RecommendUI extends JFrame{
 		Collections.sort(midc);
 		midcbb = new JComboBox(mainc.toArray());
 		
+		rescbb=new JComboBox();
+		
 		JLabel lb1=new JLabel("대분류 : ");
 		JLabel lb2=new JLabel("중분류 : ");
 		
-		//요소 위치지정
+		//�슂�냼 �쐞移섏��젙
 		recommend_btn.setBounds(0,0,150,50);
-		favorite_btn.setBounds(300,0,150,50);
-		review_btn.setBounds(450,0,150,50);
+		favorite_btn.setBounds(150,0,150,50);
+		review_btn.setBounds(300,0,150,50);
 		maincbb.setBounds(150,120,150,50);
 		midcbb.setBounds(150,220,150,50);
 		randomdice_btn.setBounds(380, 120,100,50);
 		foodfield.setBounds(380,220,100,50);
 		foodfield.setEnabled(false);
-		rescbb.setBounds(480,220,100,50);
+		rescbb.setBounds(450,220,150,50);
 		lb1.setBounds(80,130,70,30);
 		lb2.setBounds(80,230,70,30);
 		
-		//버튼이벤트달기
+		//踰꾪듉�씠踰ㅽ듃�떖湲�
 		recommend_btn.addActionListener(new ButtonAction());
 		favorite_btn.addActionListener(new ButtonAction());
 		review_btn.addActionListener(new ButtonAction());
 		randomdice_btn.addActionListener(new ButtonAction());
 		maincbb.addItemListener(new ItemAction());
 				
-		//요소 추가
+		//�슂�냼 異붽�
 		c.add(recommend_btn);
 		c.add(favorite_btn);
 		c.add(review_btn);
@@ -111,26 +113,30 @@ public class RecommendUI extends JFrame{
 	
 	private class ButtonAction implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			//랜덤버튼 클릭
+			//�옖�뜡踰꾪듉 �겢由�
 			if(e.getSource()==randomdice_btn) {
-				//control 클래스 생성
+				//control �겢�옒�뒪 �깮�꽦
 				String maincatagory = maincbb.getSelectedItem().toString();
 				String middleclass = midcbb.getSelectedItem().toString();
 				RecommendSystem rs=new RecommendSystem();
 				RestaurantSystem rss=new RestaurantSystem();
 				try {
 					String finalresult = rs.recommend(maincatagory, middleclass);
-					String[] resresult = rss.recommend(maincatagory, middleclass);
+					String[] resresult = rss.recommend(maincatagory);
 					foodfield.setText(finalresult);
-					rescbb = new JComboBox(resresult);
+					System.out.println(resresult[0]);
+					for(int i=0; i<resresult.length; i++) {
+						rescbb.addItem(resresult[i]);
+					}
+					
 				} catch (SQLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 			}
 			
-			////////////////상단버튼//////////////////////
-			//상단 메뉴추천버튼 클릭
+			////////////////�긽�떒踰꾪듉//////////////////////
+			//�긽�떒 硫붾돱異붿쿇踰꾪듉 �겢由�
 			else if(e.getSource()==recommend_btn) {
 				try {
 					RecommendUI RUI = new RecommendUI();
@@ -139,11 +145,11 @@ public class RecommendUI extends JFrame{
 					e1.printStackTrace();
 				}
 			}
-			//상단 즐겨찾기버튼 클릭
+			//�긽�떒 利먭꺼李얘린踰꾪듉 �겢由�
 			else if(e.getSource()==favorite_btn) {
 				
 			}
-			//상단 리뷰버튼 클릭
+			//�긽�떒 由щ럭踰꾪듉 �겢由�
 			else if(e.getSource()==review_btn) {
 				try {
 					ReviewUI RevUI = new ReviewUI();

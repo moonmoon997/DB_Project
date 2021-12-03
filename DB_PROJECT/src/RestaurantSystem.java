@@ -14,7 +14,7 @@ public class RestaurantSystem {
 	public RestaurantSystem() {
 		
 	}
-	public String[] recommend(String main,String mid) throws SQLException{
+	public String[] recommend(String main) throws SQLException{
 		Connection con=null;
 		String url="jdbc:oracle:thin:@localhost:1521:XE";
 		String id="RS";
@@ -33,17 +33,15 @@ public class RestaurantSystem {
 			System.out.println("Connection failed.");
 		}
 		String sql=null;
-		String sql1="SELECT * FROM (SELECT * FROM restaurant";
-		String sql2="SELECT * FROM (SELECT * FROM restaurant WHERE maincategory=?";
-		String sql3="SELECT * FROM (SELECT * FROM restaurant WHERE maincategory=? and middlecategory=?";
+		String sql1="SELECT resname FROM restaurant";
+		String sql2="SELECT resname FROM restaurant where resfoodinfo=?)";
 		
-		if(main.equals("") && mid.equals("")) { //대분류만 선택했을때
+		if(main.equals("")) { //
 			sql=sql1;
 		}
-		else if(mid.equals("") && !main.equals("")) {//중분류만 선택했을때
+		else {//
 			sql=sql2;
 		}
-		else sql=sql3;
 		
 		String[] val=null;
 		try {
@@ -51,12 +49,8 @@ public class RestaurantSystem {
 			if(sql.equals(sql1)) {
 				
 			}
-			else if(sql.equals(sql2)) {
+			else{
 				pstmt.setString(1, main);
-			}
-			else {
-				pstmt.setString(1, main);
-				pstmt.setString(2, mid);
 			}
 			
 			ResultSet rs = pstmt.executeQuery();
