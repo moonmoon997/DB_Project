@@ -32,33 +32,25 @@ public class RestaurantSystem {
 		catch(SQLException e) {
 			System.out.println("Connection failed.");
 		}
-		String sql=null;
-		String sql1="SELECT resname FROM restaurant";
-		String sql2="SELECT resname FROM restaurant where resfoodinfo=?)";
-		
-		if(main.equals("")) { //
-			sql=sql1;
-		}
-		else {//
-			sql=sql2;
-		}
+		String sql="SELECT resname FROM restaurant where resfoodinfo=?";
 		
 		String[] val=null;
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			if(sql.equals(sql1)) {
-				
-			}
-			else{
-				pstmt.setString(1, main);
-			}
-			
+			pstmt.setString(1, main);
 			ResultSet rs = pstmt.executeQuery();
+			rs.last();
+			int rnum=rs.getRow();
+			rs.beforeFirst();
+			val = new String[rnum];
+			
 			int i=1;
 			while(rs.next()) {
-				val[i]=rs.getString(i);
+				val[i-1]=rs.getString(1);
+				System.out.println(rs.getString(1));
+				i++;
 			}
-			
+			rs.close();
 			pstmt.close();
 		}
 		catch(SQLException e) {

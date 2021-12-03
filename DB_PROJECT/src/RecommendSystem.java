@@ -14,7 +14,7 @@ public class RecommendSystem {
 	public RecommendSystem() {
 		
 	}
-	public String recommend(String main,String mid) throws SQLException{
+	public Food recommend(String main,String mid) throws SQLException{
 		Connection con=null;
 		String url="jdbc:oracle:thin:@localhost:1521:XE";
 		String id="RS";
@@ -45,7 +45,7 @@ public class RecommendSystem {
 		}
 		else sql=sql3;
 		
-		String val=null;
+		Food val=null;
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			if(sql.equals(sql1)) {
@@ -60,7 +60,8 @@ public class RecommendSystem {
 			}
 			
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) val=rs.getString(1);
+			if(rs.next()) 
+				val=new Food(rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4));
 			pstmt.close();
 		}
 		catch(SQLException e) {

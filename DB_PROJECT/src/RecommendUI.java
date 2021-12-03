@@ -57,7 +57,7 @@ public class RecommendUI extends JFrame{
 		randomdice_btn.setBounds(380, 120,100,50);
 		foodfield.setBounds(380,220,100,50);
 		foodfield.setEnabled(false);
-		rescbb.setBounds(450,220,150,50);
+		rescbb.setBounds(480,220,80,30);
 		lb1.setBounds(80,130,70,30);
 		lb2.setBounds(80,230,70,30);
 		
@@ -114,17 +114,17 @@ public class RecommendUI extends JFrame{
 	private class ButtonAction implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			//�옖�뜡踰꾪듉 �겢由�
-			if(e.getSource()==randomdice_btn) {
+			if(e.getSource()==randomdice_btn) { 
+				rescbb.removeAllItems();
 				//control �겢�옒�뒪 �깮�꽦
 				String maincatagory = maincbb.getSelectedItem().toString();
 				String middleclass = midcbb.getSelectedItem().toString();
 				RecommendSystem rs=new RecommendSystem();
 				RestaurantSystem rss=new RestaurantSystem();
 				try {
-					String finalresult = rs.recommend(maincatagory, middleclass);
-					String[] resresult = rss.recommend(maincatagory);
-					foodfield.setText(finalresult);
-					System.out.println(resresult[0]);
+					Food finalresult = rs.recommend(maincatagory, middleclass);
+					String[] resresult = rss.recommend(finalresult.get_maincatagory());
+					foodfield.setText(finalresult.get_foodname());
 					for(int i=0; i<resresult.length; i++) {
 						rescbb.addItem(resresult[i]);
 					}

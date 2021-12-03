@@ -33,7 +33,7 @@ public class Restaurantlist {
 			System.out.println("Connection Failed.");
 		}
 		
-		String sql = "SELECT * FROM restaurant where maincatagory=?";
+		String sql = "SELECT * FROM restaurant";
 		
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
